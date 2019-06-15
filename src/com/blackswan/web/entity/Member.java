@@ -1,33 +1,61 @@
 package com.blackswan.web.entity;
 
 public class Member {
+	private String id;
 	private String email;
     private String name;
     private String pw;
     private String phone;
     private String profile;
-    private String blacklist;
-    private String blackreason;
-    private String eventcheck;
+    private String blackReason;
+    private String eventCheck;
     private String admin_id;
-    private String secede;
-    private String qna_number;
     private String address;
     private String address_num;
     private String regdate;
+    private String state;
 	
+ 
     public Member() {
 	
     }
     
-	public Member(String email, String name, String pw, String phone) {
+	public Member(String email, String name, String pw, String phone, String eventCheck) {
 		super();
 		this.email = email;
 		this.name = name;
 		this.pw = pw;
 		this.phone = phone;
+		this.eventCheck = eventCheck;
 	}
-	
+
+
+	public Member(String id, String email, String name, String pw, String phone, String profile, String blackReason,
+			String eventCheck, String admin_id, String address, String address_num, String regdate, String state) {
+		super();
+		this.id = id;
+		this.email = email;
+		this.name = name;
+		this.pw = pw;
+		this.phone = phone;
+		this.profile = profile;
+		this.blackReason = blackReason;
+		this.eventCheck = eventCheck;
+		this.admin_id = admin_id;
+		this.address = address;
+		this.address_num = address_num;
+		this.regdate = regdate;
+		this.state = state;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
 	public String getEmail() {
 		return email;
 	}
@@ -58,23 +86,18 @@ public class Member {
 	public void setProfile(String profile) {
 		this.profile = profile;
 	}
-	public String getBlacklist() {
-		return blacklist;
-	}
-	public void setBlacklist(String blacklist) {
-		this.blacklist = blacklist;
-	}
+
 	public String getBlackreason() {
-		return blackreason;
+		return blackReason;
 	}
 	public void setBlackreason(String blackreason) {
-		this.blackreason = blackreason;
+		this.blackReason = blackreason;
 	}
 	public String getEventcheck() {
-		return eventcheck;
+		return eventCheck;
 	}
 	public void setEventcheck(String eventcheck) {
-		this.eventcheck = eventcheck;
+		this.eventCheck = eventcheck;
 	}
 	public String getAdmin_id() {
 		return admin_id;
@@ -82,18 +105,7 @@ public class Member {
 	public void setAdmin_id(String admin_id) {
 		this.admin_id = admin_id;
 	}
-	public String getSecede() {
-		return secede;
-	}
-	public void setSecede(String secede) {
-		this.secede = secede;
-	}
-	public String getQna_number() {
-		return qna_number;
-	}
-	public void setQna_number(String qna_number) {
-		this.qna_number = qna_number;
-	}
+
 	public String getAddress() {
 		return address;
 	}
@@ -112,6 +124,7 @@ public class Member {
 	public void setRegdate(String regdate) {
 		this.regdate = regdate;
 	}
-	
+
+
     
 }

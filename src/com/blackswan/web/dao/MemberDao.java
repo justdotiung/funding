@@ -14,5 +14,6 @@ public interface MemberDao {
 	
 	int insert(Member member) throws Exception;	//회원가입
 	int update(Member member) throws Exception;	//마이페이지-정보수정
+	
 
 }
