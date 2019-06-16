@@ -9,6 +9,7 @@
 <title>마이페이지</title>
 </head>
 <body>
+<a href="../main">로고</a>
 	 <div>
 		<a href="mypage?fun=1">참여한 펀딩</a>
 		<a href="mypage?fun=2">개설한 펀딩</a>
@@ -17,18 +18,44 @@
 	 
 	<c:if test="${fun == 1}">
 		<form> 
-			<input type="date">
-			<input type="submit" value="검색">
-			<input type="button" value="교환/환불">
-			<input type="button" value="펀딩취소">
+			<div>
+				<input type="date"><span>~</span>
+				<input type="date">
+				<input type="submit" value="검색">
+			</div>
+			<input type="button" value="교환/환불"><br>
+			<input type="button" value="펀딩취소"><br>
 			<input type="button" value="배송조회">
 		</form>
 	</c:if>
 	<c:if test="${fun == 2}">
-		
+		<form>
+			<div>
+				<input type="date"><span>~</span>
+				<input type="date">
+				<input type="submit" value="검색">
+			</div>
+		</form>
+		<div>
+			심사 대기 중 입니다.
+		</div>
+		<a href="">이벤트 신청</a><br>
+		<a href="">펀딩 수정</a><br>
+		<a href="">펀딩 삭제</a>
 	</c:if>
 	<c:if test="${fun == 3}">
-		
+		<form enctype="multipart/form-data">
+		<dl>
+			<dt>이름</dt>
+			<dd><input type="file"></dd>
+			<dt>이름</dt>
+			<dd>변경이름</dd>
+			<dt>이메일</dt>
+			<dd>변경이름</dd>
+			<dt>전화번호</dt>
+			<dd>변경이름</dd>
+		</dl>		
+		</form>	
 	</c:if>
 	
 </body>
