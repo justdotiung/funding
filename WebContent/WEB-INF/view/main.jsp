@@ -4,16 +4,16 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Insert title here</title>
+<title>메인</title>
 <meta charset="UTF-8">
 </head>
 <body>
 	
 	<a href="member/login">로그인</a>
-	<c:if test="${sessionScope.id==null}">
+	<c:if test="${sessionScope.email==null}">
 	<a href="/view/guest/signup">회원가입</a>
 	</c:if>
-	<c:if test="${sessionScope.id!=null}">
+	<c:if test="${sessionScope.email!=null}">
 	<a href="member/mypage">마이페이지</a>
 	<a href="member/logout">로그아웃</a>
 	</c:if>

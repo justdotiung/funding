@@ -35,7 +35,7 @@ public class LoginController extends HttpServlet {
 				resp.sendRedirect("login?error=1");
 			else {
 				HttpSession session = req.getSession();
-				session.setAttribute("id", member.getId());
+				session.setAttribute("email", member.getEmail());
 				resp.sendRedirect("/view/main");
 			}
 		} catch (Exception e) {

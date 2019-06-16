@@ -14,8 +14,9 @@ public class IndexController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		HttpSession session = req.getSession();
-		if(session.getAttribute("id") != null)
-			System.out.println("技记肯丰");
+		String fun = req.getParameter("fun");
+//		if(session.getAttribute("id") != null)
+//			System.out.println("技记肯丰");
 		req.getRequestDispatcher("/WEB-INF/view/main.jsp").forward(req, resp);
 	}
 }
