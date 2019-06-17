@@ -25,6 +25,7 @@ public class LoginController extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String email = req.getParameter("email");
 		String pw = req.getParameter("pw");
+		HttpSession session = req.getSession();
 		
 		MemberDao dao = new OracleMemberDao();
 		try {
@@ -33,9 +34,10 @@ public class LoginController extends HttpServlet {
 				resp.sendRedirect("login?error=1");
 			else if(!member.getPw().equals(pw))
 				resp.sendRedirect("login?error=1");
+			
 			else {
-				HttpSession session = req.getSession();
 				session.setAttribute("email", member.getEmail());
+				System.out.println(member.getEmail());
 				resp.sendRedirect("/view/main");
 			}
 		} catch (Exception e) {

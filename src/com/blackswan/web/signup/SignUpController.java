@@ -34,7 +34,7 @@ public class SignUpController extends HttpServlet {
 
 		System.out.println(member);
 		if (pw == null || pw.equals("") || !pw.equals(pw1)) {
-			req.setAttribute("error", "비밀번호 불일치");
+			req.setAttribute("error", "비밀번호 불일치하거나 입력되지않았습니다.");
 			req.getRequestDispatcher("/WEB-INF/view/guest/signup.jsp").forward(req, resp);
 		}
 		try {

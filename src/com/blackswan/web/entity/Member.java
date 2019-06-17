@@ -7,13 +7,11 @@ public class Member {
     private String pw;
     private String phone;
     private String profile;
-    private String blackReason;
     private String eventCheck;
     private String admin_id;
     private String address;
     private String address_num;
     private String regdate;
-    private String state;
 	
  
     public Member() {
@@ -29,9 +27,10 @@ public class Member {
 		this.eventCheck = eventCheck;
 	}
 
+	
 
-	public Member(String id, String email, String name, String pw, String phone, String profile, String blackReason,
-			String eventCheck, String admin_id, String address, String address_num, String regdate, String state) {
+	public Member(String id, String email, String name, String pw, String phone, String profile, String eventCheck,
+			String admin_id, String address, String address_num, String regdate) {
 		super();
 		this.id = id;
 		this.email = email;
@@ -39,13 +38,11 @@ public class Member {
 		this.pw = pw;
 		this.phone = phone;
 		this.profile = profile;
-		this.blackReason = blackReason;
 		this.eventCheck = eventCheck;
 		this.admin_id = admin_id;
 		this.address = address;
 		this.address_num = address_num;
 		this.regdate = regdate;
-		this.state = state;
 	}
 
 	public String getId() {
@@ -86,13 +83,6 @@ public class Member {
 	public void setProfile(String profile) {
 		this.profile = profile;
 	}
-
-	public String getBlackreason() {
-		return blackReason;
-	}
-	public void setBlackreason(String blackreason) {
-		this.blackReason = blackreason;
-	}
 	public String getEventcheck() {
 		return eventCheck;
 	}
@@ -125,6 +115,6 @@ public class Member {
 		this.regdate = regdate;
 	}
 
-
+	
     
 }
