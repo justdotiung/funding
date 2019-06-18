@@ -14,6 +14,8 @@ public interface FundingDao {
 	
 	int insert(Funding funding) throws Exception;	//회원가입
 	int update(Funding funding) throws Exception;	//마이페이지-정보수정
+
+	Funding getTitle(String id) throws Exception;
 	
 
 }

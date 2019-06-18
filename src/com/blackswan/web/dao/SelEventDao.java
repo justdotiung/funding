@@ -2,8 +2,8 @@ package com.blackswan.web.dao;
 
 import java.util.List;
 
-import com.blackswan.web.entity.Event;
 import com.blackswan.web.entity.SelEvent;
+import com.blackswan.web.entity.SelEventView;
 
 public interface SelEventDao {
 	
@@ -13,9 +13,10 @@ public interface SelEventDao {
 	int insert(SelEvent event) throws Exception;	//회원가입
 	int update(SelEvent event) throws Exception;	//마이페이지-정보수정
 	
-	List<SelEvent> getList() throws Exception;
-	List<SelEvent> getList(int page) throws Exception;
-	List<SelEvent> getList(int page, String field, String query) throws Exception;
+	List<SelEventView> getList() throws Exception;
+	List<SelEventView> getList(int page) throws Exception;
+	List<SelEventView> getList(int page, String field, String query) throws Exception;
+
 	
 	
 }

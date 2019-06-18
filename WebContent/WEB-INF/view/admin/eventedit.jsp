@@ -23,78 +23,35 @@
 		<a href="category">카테고리관리</a>
 	</aside>
 	<!--메인------------------------------------------------  -->
-	<section>
-	<form action="" method="post">
-		<table>
-			<tr>
-				<td>이벤트상태</td>
-				<td>
-					<input type="radio" name="state" value="0"><label>전체</label>
-					<input type="radio" name="state" value="1"><label>종료</label>
-					<input type="radio" name="state" value="2"><label>진행</label>
-					<input type="radio" name="state" value="3"><label>대기</label>
-				</td>
-			</tr>
-			<tr>
-				<td>이벤트기간</td>
-				<td>
-					<input type="date"><span>~</span><input type="date">
-					
-				</td>
-			</tr>
-			<tr>
-				<td>대상</td>
-				<td>
-					<select>
-						<option value="전체">전체</option>
-						<option value="강아지">강아지</option>
-						<option value="고양이">고양이</option>
-					</select>
-				</td>
-			</tr>
-			<tr>
-				<td>업체명</td>
-				<td><input type="text" name="name"></td>
-			</tr>
-		</table>
-		<input type="submit" value="검색">
-	</form>
-	</section>
-	<div>
-		검색결과:총1건(진행중:0)
-	</div>
-	
 	
 	<section>
+	<form action="eventedit" method="post">
 		<table>
-			<thead>
 				<tr>
-					<td>번호</td>
 					<td>업체명</td>
-					<td>대상</td>
-					<td>신청일</td>
-					<td>시작일</td>
-					<td>종료일</td>
-					<td>상태</td>
+					<td>${funding.title}</td>
 				</tr>
-			</thead>
-			<tbody>
-			<c:forEach var="e" items="${event}">
 				<tr>
-					<td>${e.id}</td>
-					<td><a href="eventedit">${e.funding_id}</a></td>
-					<td>이미지</td>
-					<td>노출기간</td>
-					<td>고</td>
-					<td>고</td>
-					<td>고</td>
+					<td>이벤트 기간</td>
+					<td>${event.sdate}~${event.edate}</td>
 				</tr>
-			</c:forEach>
-			</tbody>
+				<tr>
+					<td>이미지</td>
+					<td><img src="/upload/${event.attach}" style="width: 150px"></td>
+				</tr>
+				<tr>
+					<td>상태</td>
+					<td>
+						<input type="radio" name="state" value="1"><label>대기</label>
+						<input type="radio" name="state" value="2"><label>시작</label>
+						<input type="radio" name="state" value="3"><label>종료</label>
+					</td>
+				</tr>
 		</table>
-		<div>
-			<a href="">이벤트 등록</a>
-		</div>
+		<input type="hidden" name="id" value="${event.id}"> 
+		<input type="submit" value="확인">
+		<a href="event">취소</a>
+	</form>
 	</section>
 </body>
 </html>

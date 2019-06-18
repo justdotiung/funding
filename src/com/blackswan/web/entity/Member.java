@@ -45,6 +45,15 @@ public class Member {
 		this.regdate = regdate;
 	}
 
+	public Member(String email, String phone) {
+	
+		this.email = email;
+		
+		this.phone = phone;
+	
+	}
+
+
 	public String getId() {
 		return id;
 	}

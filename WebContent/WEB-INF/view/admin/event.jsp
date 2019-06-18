@@ -43,16 +43,6 @@
 				</td>
 			</tr>
 			<tr>
-				<td>대상</td>
-				<td>
-					<select>
-						<option value="전체">전체</option>
-						<option value="강아지">강아지</option>
-						<option value="고양이">고양이</option>
-					</select>
-				</td>
-			</tr>
-			<tr>
 				<td>업체명</td>
 				<td><input type="text" name="name"></td>
 			</tr>
@@ -71,7 +61,6 @@
 				<tr>
 					<td>번호</td>
 					<td>업체명</td>
-					<td>대상</td>
 					<td>신청일</td>
 					<td>시작일</td>
 					<td>종료일</td>
@@ -82,18 +71,17 @@
 			<c:forEach var="e" items="${event}">
 				<tr>
 					<td>${e.id}</td>
-					<td><a href="">${e.funding_id}</a></td>
-					<td>이미지</td>
-					<td>노출기간</td>
-					<td>고</td>
-					<td>고</td>
-					<td>고</td>
+					<td><a href="eventedit?id=${e.id}">${e.title}</a></td>
+					<td>${e.regdate}</td>
+					<td>${e.sdate}</td>
+					<td>${e.edate}</td>
+					<td>${e.state}</td>
 				</tr>
 			</c:forEach>
 			</tbody>
 		</table>
 		<div>
-			<a href="">이벤트 등록</a>
+			<a href="reg">이벤트 등록</a>
 		</div>
 	</section>
 </body>

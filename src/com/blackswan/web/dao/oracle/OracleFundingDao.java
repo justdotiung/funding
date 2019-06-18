@@ -117,6 +117,33 @@ public class OracleFundingDao implements FundingDao {
 		return 0;
 	}
 
+	@Override
+	public Funding getTitle(String id) throws Exception {
+		Funding	funding =new Funding();
+		
+		String sql = "SELECT title FROM funding WHERE id = to_number(?)";
+
+		String url = "jdbc:oracle:thin:@222.111.247.47:1522/xepdb1";
+		Class.forName("oracle.jdbc.driver.OracleDriver");
+		Connection con = DriverManager.getConnection(url, "\"PRJ\"", "1234");
+		PreparedStatement st = con.prepareStatement(sql);
+		
+		st.setString(1, id);
+		
+		
+		ResultSet rs = st.executeQuery();
+		while(rs.next()) {
+			funding.setTitle(rs.getString("title"));
+						
+
+		}
+		rs.close();
+		st.close();
+		con.close();
+
+		return funding;
+	}
+
 	
 	
 }

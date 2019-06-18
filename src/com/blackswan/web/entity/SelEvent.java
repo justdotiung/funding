@@ -18,6 +18,17 @@ public class SelEvent {
 	
 	
 
+	public SelEvent(String id,String regdate, String sdate, String edate, String state) {
+		super();
+		this.id = id;
+		this.regdate = regdate;
+		this.sdate = sdate;
+		this.edate = edate;
+		this.state = state;
+	}
+
+
+
 	public SelEvent(String funding_id, String sdate, String edate, String attach, String link, String manager,
 			String man_eamil) {
 		this.funding_id = funding_id;

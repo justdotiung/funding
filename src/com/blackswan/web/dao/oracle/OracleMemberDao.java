@@ -106,7 +106,24 @@ public class OracleMemberDao implements MemberDao {
 	public int update(Member member) throws Exception {
 		return 0;
 	}
-
-	
+	@Override
+	public List<Member> getUK() throws Exception {
+		List<Member> list = new ArrayList<Member>();
+		String sql = "select email , phone from member";
+		String url = "jdbc:oracle:thin:@222.111.247.47:1522/xepdb1";
+		Class.forName("oracle.jdbc.driver.OracleDriver");
+		Connection con = DriverManager.getConnection(url, "\"PRJ\"", "1234");
+		PreparedStatement pt = con.prepareStatement(sql);
+		
+		ResultSet rs = pt.executeQuery();
+		while(rs.next()) {
+		Member member = new Member(
+					rs.getString("email"),
+					rs.getString("phone")
+				    );
+		list.add(member);
+		}
+		return list;
+	}
 	
 }
