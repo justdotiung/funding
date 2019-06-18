@@ -82,7 +82,7 @@
 			<c:forEach var="e" items="${event}">
 				<tr>
 					<td>${e.id}</td>
-					<td><a href="">${e.funding_id}</a></td>
+					<td><a href="eventedit">${e.funding_id}</a></td>
 					<td>이미지</td>
 					<td>노출기간</td>
 					<td>고</td>

@@ -15,7 +15,7 @@
 		<a href="/view/guest/signup">회원가입</a>
 	</c:if>
 	<c:if test="${!empty sessionScope.email&&sessionScope.email==name}">
-	${sessionScope.email}
+	
 		<a href="admin/index">관리자 페이지</a>
 		<a href="member/logout">로그아웃</a>
 	</c:if>

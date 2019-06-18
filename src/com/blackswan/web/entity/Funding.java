@@ -22,7 +22,7 @@ public class Funding {
 	
 	public Funding(String member_id, String category_id, String title, String amount, String intro_img, String sDate,
 			String eDate) {
-		super();
+		
 		this.member_id = member_id;
 		this.category_id = category_id;
 		this.title = title;
@@ -36,7 +36,7 @@ public class Funding {
 
 	public Funding(String id, String admin_id, String member_id, String category_id, String regdate, String title,
 			String amount, String video, String intro_img, String sDate, String eDate, String hit, String state) {
-		super();
+		
 		this.id = id;
 		this.admin_id = admin_id;
 		this.member_id = member_id;

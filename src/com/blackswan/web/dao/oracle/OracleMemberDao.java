@@ -32,7 +32,7 @@ public class OracleMemberDao implements MemberDao {
 		
 		String sql = "SELECT * FROM MEMBER WHERE " + field + " LIKE ? AND NUM BETWEEN ? AND ?";
 
-		String url = "jdbc:oracle:thin:@192.168.0.16:1522/xepdb1";
+		String url = "jdbc:oracle:thin:@222.111.247.47:1522/xepdb1";
 		Class.forName("oracle.jdbc.driver.OracleDriver");
 		Connection con = DriverManager.getConnection(url, "\"PRJ\"", "1234");
 		PreparedStatement st = con.prepareStatement(sql);

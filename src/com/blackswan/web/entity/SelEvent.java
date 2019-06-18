@@ -3,7 +3,7 @@ package com.blackswan.web.entity;
 public class SelEvent {
 	private String id;
 	private String admin_id;
-	private String member_id;
+	private String funding_id;
 	private String regdate;
 	private String sdate;
 	private String edate;
@@ -18,12 +18,25 @@ public class SelEvent {
 	
 	
 
-	public SelEvent(String id, String admin_id, String member_id, String regdate, String sdate, String edate,
+	public SelEvent(String funding_id, String sdate, String edate, String attach, String link, String manager,
+			String man_eamil) {
+		this.funding_id = funding_id;
+		this.sdate = sdate;
+		this.edate = edate;
+		this.attach = attach;
+		this.link = link;
+		this.manager = manager;
+		this.man_eamil = man_eamil;
+	}
+
+
+
+	public SelEvent(String id, String admin_id, String funding_id, String regdate, String sdate, String edate,
 			String attach, String link, String manager, String man_eamil, String state) {
 		
 		this.id = id;
 		this.admin_id = admin_id;
-		this.member_id = member_id;
+		this.funding_id = funding_id;
 		this.regdate = regdate;
 		this.sdate = sdate;
 		this.edate = edate;
@@ -52,13 +65,19 @@ public class SelEvent {
 		this.admin_id = admin_id;
 	}
 
-	public String getMember_id() {
-		return member_id;
+
+
+	public String getFunding_id() {
+		return funding_id;
 	}
 
-	public void setMember_id(String member_id) {
-		this.member_id = member_id;
+
+
+	public void setFunding_id(String funding_id) {
+		this.funding_id = funding_id;
 	}
+
+
 
 	public String getRegdate() {
 		return regdate;

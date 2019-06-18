@@ -42,14 +42,14 @@
 			${f.eDate}
 			${f.title}
 			<a href="/upload/${f.intro_img}">${f.intro_img}</a>
-			<img src="/upload/${f.intro_img}">
+			<img src="/upload/${f.intro_img}" style="width: 300px">
 			${f.amount}
 			${f.category_id}
 			심사  중 입니다.
 		</div>
 	</c:forEach>
 		<a href="funding">펀딩신청</a>
-		<a href="">이벤트 신청</a><br>
+		<a href="eventreg">이벤트 신청</a><br>
 		<a href="">펀딩 수정</a><br>
 		<a href="">펀딩 삭제</a>
 	</c:if>

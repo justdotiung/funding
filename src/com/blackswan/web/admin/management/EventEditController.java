@@ -13,8 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 import com.blackswan.web.dao.SelEventDao;
 import com.blackswan.web.dao.oracle.OracleSelEventDao;
 import com.blackswan.web.entity.SelEvent;
-@WebServlet("/view/admin/event")
-public class EventController extends HttpServlet{
+@WebServlet("/view/admin/eventedit")
+public class EventEditController extends HttpServlet{
 @Override
 protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 	SelEventDao sDao = new OracleSelEventDao();
@@ -27,6 +27,6 @@ protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws Se
 	}
 	
 	req.setAttribute("event",list);
-	req.getRequestDispatcher("/WEB-INF/view/admin/event.jsp").forward(req, resp);
+	req.getRequestDispatcher("/WEB-INF/view/admin/eventedit.jsp").forward(req, resp);
 }
 }
