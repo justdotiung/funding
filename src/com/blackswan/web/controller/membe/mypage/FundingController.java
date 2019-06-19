@@ -77,14 +77,18 @@ public class FundingController extends HttpServlet {
 			System.out.println(suffix);
 			System.out.println(parenE);
 			
-			if(parenE == -1)
+			if(parenE == -1) {
 				fileName = name + "("+1+")"+suffix;
-			
-			else {
+				filePath = path+File.separator+fileName;
+				System.out.println(filePath);
+			}else {
 				String indexC = name.substring(parenS+1, parenE);
 				int indexN = Integer.parseInt(indexC);
 				indexN++;
 				fileName = fileName.substring(0, parenS +1)+indexN + ")" + suffix;
+				
+				filePath = path+File.separator+fileName;
+				System.out.println(filePath);
 			}
 		}
 		InputStream fis =filePart.getInputStream();
