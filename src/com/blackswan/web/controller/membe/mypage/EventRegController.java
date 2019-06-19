@@ -34,14 +34,14 @@ public class EventRegController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		HttpSession session = req.getSession();
-		String email = (String)session.getAttribute("email");
+		String mid = (String)session.getAttribute("id");
 		
 		MemberDao dao = new OracleMemberDao();
 		FundingDao fDao = new OracleFundingDao();
 		Funding funding = new Funding();
 		try {
-			String id = dao.get(email).getId();
-			funding = fDao.get(id);
+			
+			funding = fDao.get(mid);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -55,12 +55,10 @@ public class EventRegController extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		HttpSession session = req.getSession();
-		String email = (String)session.getAttribute("email");
+		String mid = (String)session.getAttribute("id");
 		
-		String funding = req.getParameter("funding");
 		Part filePart = req.getPart("file");
 		String manager = req.getParameter("manager");
-		String amount = req.getParameter("amount");
 		String sDate = req.getParameter("sDate");
 		String eDate = req.getParameter("eDate");
 		String eMail = req.getParameter("man_eamil");
@@ -92,14 +90,15 @@ public class EventRegController extends HttpServlet {
 			System.out.println(suffix);
 			System.out.println(parenE);
 			
-			if(parenE == -1)
+			if(parenE == -1) {
 				fileName = name + "("+1+")"+suffix;
-			
-			else {
+				filePath = path+File.separator+fileName;
+			}else {
 				String indexC = name.substring(parenS+1, parenE);
 				int indexN = Integer.parseInt(indexC);
 				indexN++;
 				fileName = fileName.substring(0, parenS +1)+indexN + ")" + suffix;
+				filePath = path+File.separator+fileName;
 			}
 		}
 		InputStream fis =filePart.getInputStream();
@@ -118,9 +117,8 @@ public class EventRegController extends HttpServlet {
 		MemberDao dao = new OracleMemberDao();
 		FundingDao fDao = new OracleFundingDao();
 		try {
-			String id = dao.get(email).getId();
-			fDao.get(id).getId();
-			SelEvent selEvent = new SelEvent(fDao.get(id).getId(),sDate, eDate, fileName, rink, manager, eMail);
+		
+			SelEvent selEvent = new SelEvent(fDao.get(mid).getId(),sDate, eDate, fileName, rink, manager, eMail);
 			
 			SelEventDao sdao = new OracleSelEventDao();
 			result = sdao.insert(selEvent);

@@ -19,20 +19,18 @@ public class MypageController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		HttpSession session = req.getSession();
-		String email = (String) session.getAttribute("email");
+		String mid = (String) session.getAttribute("id");
 		String fun = req.getParameter("fun");
-		MemberDao mDao = new OracleMemberDao();
 		FundingDao dao = new OracleFundingDao();
 		
-		System.out.println(session.getAttribute("email"));
 		
 		if(req.getParameter("fun") == null)
 			req.getRequestDispatcher("/WEB-INF/view/member/mypage.jsp").forward(req, resp);	
 		else {
 
 			try {
-				String id = mDao.get(email).getId();
-				req.setAttribute("funding", dao.getList(id));
+				
+				req.setAttribute("funding", dao.getList(mid));
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

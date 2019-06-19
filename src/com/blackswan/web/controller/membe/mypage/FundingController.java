@@ -31,10 +31,10 @@ public class FundingController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		HttpSession session = req.getSession();
-		String email = (String)session.getAttribute("email");
+		String id = (String)session.getAttribute("id");
 		
 		
-		System.out.println(session.getAttribute("email"));
+		System.out.println(session.getAttribute("id"));
 		
 		req.getRequestDispatcher("/WEB-INF/view/member/funding.jsp").forward(req,resp);
 			
@@ -42,7 +42,7 @@ public class FundingController extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		HttpSession session = req.getSession();
-		String email = (String)session.getAttribute("email");
+		String mid = (String)session.getAttribute("id");
 		
 		String title = req.getParameter("title");
 		Part filePart = req.getPart("img");
@@ -86,7 +86,6 @@ public class FundingController extends HttpServlet {
 				int indexN = Integer.parseInt(indexC);
 				indexN++;
 				fileName = fileName.substring(0, parenS +1)+indexN + ")" + suffix;
-				
 				filePath = path+File.separator+fileName;
 				System.out.println(filePath);
 			}
@@ -104,10 +103,8 @@ public class FundingController extends HttpServlet {
 		fis.close();
 		
 		int result = 0;
-		MemberDao dao = new OracleMemberDao();
 		try {
-			dao.get(email);
-			Funding funding = new Funding(dao.get(email).getId(), category, title, amount, fileName, sDate, eDate);
+			Funding funding = new Funding(mid, category, title, amount, fileName, sDate, eDate);
 			
 			FundingDao fdao = new OracleFundingDao();
 			result = fdao.insert(funding);

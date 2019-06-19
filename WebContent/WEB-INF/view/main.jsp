@@ -10,16 +10,16 @@
 <body>
 <c:set var="name" value="admin" />
 
-	<c:if test="${empty sessionScope.email}">
+	<c:if test="${empty sessionScope.id}">
 		<a href="member/login">로그인</a>
 		<a href="/view/guest/signup">회원가입</a>
 	</c:if>
-	<c:if test="${!empty sessionScope.email&&sessionScope.email==name}">
+	<c:if test="${!empty sessionScope.id&&sessionScope.id==1}">
 	
 		<a href="admin/index">관리자 페이지</a>
 		<a href="member/logout">로그아웃</a>
 	</c:if>
-	<c:if test="${!empty sessionScope.email&&sessionScope.email!=name}">
+	<c:if test="${!empty sessionScope.id&&sessionScope.id!=1}">
 		<a href="member/mypage">마이페이지</a>
 		<a href="member/logout">로그아웃</a>
 	</c:if>
