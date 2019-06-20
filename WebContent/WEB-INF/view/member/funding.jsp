@@ -21,16 +21,9 @@
 				<td>카테고리</td>
 				<td>
 					<select name="category">
-						<option  value="4">사료</option>
-						<option  value="5">간식</option>
-						<option  value="6">배변용품</option>
-						<option  value="7">건강관리</option>
-						<option  value="8">미용용품</option>
-						<option  value="9">장난감</option>
-						<option  value="10">리빙</option>
-						<option  value="11">패션</option>
-						<option  value="12">야외용품</option>
-						<option  value="13">기타</option>
+					<c:forEach var="cate" items="${category}">
+						<option  value="${cate.id}">${cate.name}</option>
+					</c:forEach>
 					</select>
 				</td>
 			</tr>

@@ -15,8 +15,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
+import com.blackswan.web.dao.CategoryDao;
 import com.blackswan.web.dao.FundingDao;
 import com.blackswan.web.dao.MemberDao;
+import com.blackswan.web.dao.oracle.OracleCategoryDao;
 import com.blackswan.web.dao.oracle.OracleFundingDao;
 import com.blackswan.web.dao.oracle.OracleMemberDao;
 import com.blackswan.web.entity.Funding;
@@ -30,11 +32,18 @@ import com.blackswan.web.entity.Funding;
 public class FundingController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		HttpSession session = req.getSession();
-		String id = (String)session.getAttribute("id");
+//		HttpSession session = req.getSession();
+//		String id = (String)session.getAttribute("id");
+//		System.out.println(session.getAttribute("id"));
+		CategoryDao cDao = new OracleCategoryDao();
+		try {
+			
+			req.setAttribute("category", cDao.getlist());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
-		
-		System.out.println(session.getAttribute("id"));
 		
 		req.getRequestDispatcher("/WEB-INF/view/member/funding.jsp").forward(req,resp);
 			
