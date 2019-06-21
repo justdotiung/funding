@@ -157,6 +157,13 @@ public class OracleSelEventDao implements SelEventDao {
 		result = st.executeUpdate();
 	
 		return result;	
-
 	}
+
+	@Override
+	public SelEvent search() throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	
 }

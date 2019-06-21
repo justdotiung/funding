@@ -24,7 +24,7 @@
 	</aside>
 	<!--메인------------------------------------------------  -->
 	<section>
-	<form action="" method="post">
+	<form action="event" method="post">
 		<table>
 			<tr>
 				<td>이벤트상태</td>

@@ -17,6 +17,6 @@ public interface SelEventDao {
 	List<SelEventView> getList(int page) throws Exception;
 	List<SelEventView> getList(int page, String field, String query) throws Exception;
 
-	
+	SelEvent search() throws Exception;
 	
 }
