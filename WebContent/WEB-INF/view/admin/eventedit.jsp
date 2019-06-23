@@ -50,7 +50,7 @@
 		</table>
 		<input type="hidden" name="id" value="${event.id}"> 
 		<input type="submit" value="확인">
-		<a href="event">취소</a>
+		<a href="event?page=#">취소</a>
 	</form>
 	</section>
 </body>

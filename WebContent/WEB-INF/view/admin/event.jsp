@@ -29,30 +29,34 @@
 			<tr>
 				<td>이벤트상태</td>
 				<td>
-					<input type="radio" name="state" value="0"><label>전체</label>
-					<input type="radio" name="state" value="1"><label>종료</label>
+					<input type="radio" name="state" value="0" checked><label>전체</label>
+					<input type="radio" name="state" value="1"><label>심사</label>
 					<input type="radio" name="state" value="2"><label>진행</label>
-					<input type="radio" name="state" value="3"><label>대기</label>
+					<input type="radio" name="state" value="3"><label>종료</label>
 				</td>
 			</tr>
 			<tr>
 				<td>이벤트기간</td>
 				<td>
-					<input type="date"><span>~</span><input type="date">
-					
+					<input type="date" name="sdate">
+					<span>~</span>
+					<input type="date" name="edate">
 				</td>
 			</tr>
 			<tr>
 				<td>업체명</td>
-				<td><input type="text" name="name"></td>
+				<td><input type="text" name="title"></td>
 			</tr>
 		</table>
 		<input type="submit" value="검색">
 	</form>
 	</section>
-	<div>
-		검색결과:총1건(진행중:0)
-	</div>
+	<c:if test="${empty count}">
+		<div>검색결과:총0건(진행중:0)</div>
+	</c:if>
+	<c:if test="${not empty count}">
+		<div>검색결과:총${count}건(진행중:0)</div>
+	</c:if>
 	
 	
 	<section>
@@ -69,13 +73,23 @@
 			</thead>
 			<tbody>
 			<c:forEach var="e" items="${event}">
+			<c:set var="sta" value="${e.state}"/>
 				<tr>
 					<td>${e.id}</td>
 					<td><a href="eventedit?id=${e.id}">${e.title}</a></td>
 					<td>${e.regdate}</td>
 					<td>${e.sdate}</td>
 					<td>${e.edate}</td>
-					<td>${e.state}</td>
+					<c:if test="${sta==1}">
+						<td>심사</td>
+					</c:if>
+					<c:if test="${sta==2}">
+						<td>진행</td>
+					</c:if>
+					<c:if test="${sta==3}">
+						<td>종료</td>
+					</c:if>
+						
 				</tr>
 			</c:forEach>
 			</tbody>
@@ -83,6 +97,28 @@
 		<div>
 			<a href="reg">이벤트 등록</a>
 		</div>
+	  
+		<c:set var="p" value="${(empty param.page) ? 1 : param.page}"/>	
+		<c:set var="start" value="${p - (p-1)%5}"/>	
+		여기는 param.page:${p}<br>
+		여기는 page - (page-1)%5:${start}
+
+		<section>
+			<h1>페이지</h1>
+			<div>
+				<div>
+					<a href="event?page=${(p < 6)? p : p -5}">이전</a>
+				</div>
+				<ul>
+					<c:forEach var="n" begin="${start}" end="${start+4}" varStatus="s">
+						<li><a href="event?page=${n}">${n}</a></li>
+					</c:forEach>
+				</ul>
+				<div>
+					<a href="event?page=${start+5}">다음</a>
+				</div>
+			</div>
+		</section>
 	</section>
 </body>
 </html>
