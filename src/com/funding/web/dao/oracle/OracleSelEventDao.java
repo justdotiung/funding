@@ -24,32 +24,41 @@ public class OracleSelEventDao implements SelEventDao {
 	@Override
 	public List<SelEventView> getList(int page) throws ClassNotFoundException, SQLException {
 		// TODO Auto-generated method stub
-		return getList(page, "title", "");
+		return getList(page, "","","","");
 	}
-
-	@Override
-	public List<SelEventView> getList(int page, String field, String query) throws ClassNotFoundException, SQLException {
+	
+	public List<SelEventView> getList(int page, String query, String sdate, String edate, String state) throws ClassNotFoundException, SQLException {
 		int start = 1 + (page - 1) * 10;
 		
 		int end = page * 10;
 		
 		List<SelEventView> list = new ArrayList<>();
 		
-
-		String sql ="select title,regdate,to_char(sdate,'YYYY-MM-DD') sdate,to_char(edate,'YYYY-MM-DD') edate, state, id from SEL_EVENT_VIEW "
-				+ "where "+field+" like ? and num between ? and ?";
+		//String sql ="SELECT num, title, to_char(regdate,'YYYY.MM.DD') regdate, to_char(sdate,'YYYY.MM.DD') sdate, to_char(edate,'YYYY.MM.DD') edate, state, id FROM sel_event_view where title like '%"+query+"%'";
 		
+		StringBuilder sql= new StringBuilder(); 
+		sql.append("SELECT num, title, to_char(regdate,'YYYY.MM.DD') regdate, to_char(sdate,'YYYY.MM.DD') sdate, to_char(edate,'YYYY.MM.DD') edate, state, id FROM sel_event_view where title like '%"+query+"%'");
+		
+		if("0".equals(state))
+			sql.append("");	
+		if(!sdate.equals(""))
+			sql.append(" and sdate >=to_date('"+sdate+"')"); 
+		if(!edate.equals(""))
+			sql.append(" and edate <=to_date('"+edate+"')"); 
+		if(!state.equals("") && !"0".equals(state))
+			sql.append(" and state ="+state); 
+		sql.append(" and num between "+start+" and "+end);
+		
+	
 		String url = "jdbc:oracle:thin:@222.111.247.47:1522/xepdb1";
 		Class.forName("oracle.jdbc.driver.OracleDriver");
 		Connection con = DriverManager.getConnection(url, "\"PRJ\"", "1234");
-		PreparedStatement st = con.prepareStatement(sql);
+		Statement st = con.createStatement();
 		
-		st.setString(1, "%" + query + "%");
-		st.setInt(2, start);
-		st.setInt(3, end);
-		ResultSet rs = st.executeQuery();
+	
+		ResultSet rs = st.executeQuery(sql.toString());
 		
-		while (rs.next()) {
+		while(rs.next()) {
 			SelEventView event = new SelEventView(
 					rs.getString("id"),
 					rs.getString("regdate"),
@@ -57,8 +66,6 @@ public class OracleSelEventDao implements SelEventDao {
 					rs.getString("edate"), 
 					rs.getString("state"),
 					rs.getString("title"));
-				
-
 			list.add(event);
 		}
 
@@ -155,104 +162,46 @@ public class OracleSelEventDao implements SelEventDao {
 	}
 
 	@Override
-	public List<SelEventView> search(int page , SelEventView selEvent) throws Exception {
-		List<String> sqls = new ArrayList<>(); 
-		List<SelEventView> list = new ArrayList<>();
-		
-		int start = 1 + (page - 1) * 10;
-		int end = page * 10;
-		
-		String sql ="select title,regdate,to_char(sdate,'YYYY-MM-DD') sdate,to_char(edate,'YYYY-MM-DD') edate, state, id from SEL_EVENT_VIEW";
-		//String e = "";
-		if(selEvent.getState().equals("0"))
-			sql="select title,regdate,to_char(sdate,'YYYY-MM-DD') sdate,to_char(edate,'YYYY-MM-DD') edate, state, id from SEL_EVENT_VIEW";
-		if(!selEvent.getTitle().equals("") && selEvent.getTitle() !=null ) {
-			String sq = "title like '%"+selEvent.getTitle()+"%'";
-			sqls.add(sq);
-		}
-		if(!selEvent.getSdate().equals("") && selEvent.getSdate() !=null ) {
-			String sq ="sdate = '"+selEvent.getSdate()+"'";
-			sqls.add(sq);
-		}
-		if(!selEvent.getState().equals("") && selEvent.getState() !=null && !selEvent.getState().equals("0") ) {
-			String sq ="state = '"+selEvent.getState()+"'";
-			sqls.add(sq);
-		}
-		if(!selEvent.getEdate().equals("") && selEvent.getEdate() !=null ) {
-			String sq ="edate = '"+selEvent.getEdate()+"'";
-			sqls.add(sq);
-		}
-		if(sqls.size() != 0) {
-			sql += " where ";
-			for (int i = 0; i < sqls.size(); i++) {
-				if(i == sqls.size()-1)
-					sql+=sqls.get(i);
-				else
-					sql+=sqls.get(i)+" and ";
-			}
-			sql+=" and num between '"+start+"' and '"+end+"'";
-			System.out.println(sql);
-		}else
-			sql+=" where num between '"+start+"' and '"+end+"'";
-			System.out.println(sql);
-		String url = "jdbc:oracle:thin:@222.111.247.47:1522/xepdb1";
-		Class.forName("oracle.jdbc.driver.OracleDriver");
-		Connection con = DriverManager.getConnection(url, "\"PRJ\"", "1234");
-		Statement st = con.createStatement();
-		ResultSet rs = st.executeQuery(sql);
-		
-		while(rs.next()) {
-			SelEventView event = new SelEventView(
-					rs.getString("id"),
-					rs.getString("regdate"),
-					rs.getString("sdate"),
-					rs.getString("edate"), 
-					rs.getString("state"),
-					rs.getString("title"));
-			list.add(event);
-		}
-		rs.close();
-		st.close();
-		con.close();
-		
-		return list;
-	}
-	
-	@Override
 	public int getCount() throws Exception {
 		
-		return getCount("title", "");
+		return getCount("","","","");
 	}
 
 	@Override
-	public int getCount(String field, String query)throws Exception {
+	public int getCount(String query, String sdate, String edate, String state)throws Exception {
 		int count=0;
-		String sql = "select count(id) count from SEL_EVENT_VIEW where "+field+" like ?";
+		StringBuilder sql = new StringBuilder();
+		
+		sql.append("select count(id) count from SEL_EVENT_VIEW where title like '%"+query+"%'");		
+				
+		if("0".equals(state) && state != null)
+			sql.append("");	
+		if(!sdate.equals("") && sdate!= null)
+			sql.append(" and sdate >=to_date('"+sdate+"')"); 
+		if(!edate.equals("") && edate != null)
+			sql.append(" and edate <=to_date('"+edate+"')"); 
+		if(!state.equals("") && !"0".equals(state) && state !=null)
+			sql.append(" and state ="+state); 
+		
+		
 		
 		String url = "jdbc:oracle:thin:@222.111.247.47:1522/xepdb1";
 		Class.forName("oracle.jdbc.driver.OracleDriver");
+		
+		
 		Connection connection = DriverManager.getConnection(url, "\"PRJ\"", "1234");
-	//	Statement statement = connection.createStatement();
-		PreparedStatement statement = connection.prepareStatement(sql);
-		statement.setString(1, "%"+query+"%");
-		//Statement는 sql을 넣어줘야 한다.
-		//result=statement.executeUpdate(sql);
-		ResultSet rs = statement.executeQuery();
+		Statement statement = connection.createStatement();
+		
+		
+		ResultSet rs = statement.executeQuery(sql.toString());
 		while(rs.next())
 			count = rs.getInt("count");
 
  		rs.close();	
 		statement.close();
 		connection.close();
-
 		return count;
 
 	}
 
-	@Override
-	public List<SelEventView> search(SelEventView selEvent) throws Exception {
-		// TODO Auto-generated method stub
-		return search(1, selEvent);
-	}
-	
 }

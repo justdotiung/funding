@@ -21,41 +21,60 @@ public class EventController extends HttpServlet {
 		
 		int page = 1;
 		String p = req.getParameter("page");
-	
+		String title = "";
+		String state ="";
+		String edate ="";
+		String sdate ="";
+		
+		String new_title = req.getParameter("title");
+		String new_state = req.getParameter("state");
+		String new_sdate = req.getParameter("sdate");
+		String new_edate = req.getParameter("edate");
+		
+		String old_title = req.getParameter("old_title");
+		String old_sdate = req.getParameter("old_sdate");
+		String old_edate = req.getParameter("old_edate");
+		String old_state = req.getParameter("old_state");
+		
+		
 		if(p!=null && !p.equals(""))
 			page =Integer.parseInt(p);
 		
-		System.out.println(page);
+		if(new_title !=null ) {
+			title= new_title;
+			if(old_title!=null && !old_title.equals(new_title))
+				page=1;
+		}
+		if(new_state !=null) {
+			state = new_state;
+			if(old_state!=null && !old_state.equals(new_state))
+				page=1;
+		}
+		if(new_sdate !=null) {
+			sdate = new_sdate;
+			if(old_sdate!=null && !old_sdate.equals(new_sdate))
+				page=1;
+		}
+		if(new_edate !=null) {
+			edate =new_edate;
+			if(old_edate!=null && !old_edate.equals(new_edate))
+				page=1;
+		}
 		SelEventDao sDao = new OracleSelEventDao();
 		List<SelEventView> list = new ArrayList<>();
 		try {
-			
-			list = sDao.getList(page);
+			int count = sDao.getCount(title,sdate,edate,state);
+			int scount = sDao.getCount(title,sdate,edate,"2");
+			list = sDao.getList(page,title,sdate,edate,state);
+			req.setAttribute("scount", scount);
+			req.setAttribute("count", count);
+			req.setAttribute("event", list);
+		
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-		req.setAttribute("event", list);
 		req.getRequestDispatcher("/WEB-INF/view/admin/event.jsp").forward(req, resp);
 	}
 	
-	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String title = req.getParameter("title");
-		String state = req.getParameter("state");
-		String sdate = req.getParameter("sdate");
-		String edate = req.getParameter("edate");
-		SelEventDao dao = new OracleSelEventDao();
-		SelEventView selEvent = new SelEventView(sdate,edate,state,title);	
-		try {
-			req.setAttribute("count", dao.getCount("title", title));
-			req.setAttribute("event", dao.search(selEvent));
-		} catch (Exception e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-	
-		req.getRequestDispatcher("/WEB-INF/view/admin/event.jsp").forward(req, resp);
-	}
 }
