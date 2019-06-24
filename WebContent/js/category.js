@@ -17,13 +17,20 @@ window.addEventListener("load",function(){
 
         dl.innerHTML="";
         var key = Object.keys(json[0]);
-      
+        alert(key);
+        console.log(json.lenth);
         for(var i = 0; i<json.lenth;i++){
-            var 
+            alert("추가");
+            
+            var cloneDl = document.importNode(tempate.textContent,ture);
+            
+            var nameEl = cloneDl.querySelector(".name");
+            var count = cloneDl.querySelector(".count");
+
+            nameEl.innerText=json[i][key[0]];
+            count.innerText=json[i][key[1]];
+            
+            dl.append(cloneDl);
         }
-
     };
-
-
-
 });
