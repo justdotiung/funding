@@ -8,7 +8,7 @@
 <meta charset="UTF-8">
 </head>
 <body>
-<c:set var="name" value="admin" />
+
 
 	<c:if test="${empty sessionScope.id}">
 		<a href="member/login">로그인</a>

@@ -1,6 +1,7 @@
 package com.funding.web.admin.management;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,6 +17,7 @@ import com.funding.web.dao.oracle.OracleCategoryDao;
 import com.funding.web.entity.Category;
 import com.funding.web.entity.CategoryView;
 
+
 @WebServlet("/view/admin/category-ajax")
 public class CategoryAjaxController extends HttpServlet {
 	@Override
@@ -24,7 +26,7 @@ public class CategoryAjaxController extends HttpServlet {
 		String id = (String) session.getAttribute("id");
 		List<CategoryView> list = new ArrayList<>();
 		int sum = 0;
-
+		StringBuilder json = new StringBuilder();
 //		if (id == null || !id.equals("1")) {
 //			resp.sendRedirect("/error.jsp");
 //			return;
@@ -46,15 +48,32 @@ public class CategoryAjaxController extends HttpServlet {
 //					resp.sendRedirect("/error.jsp");
 //					return;
 //				}
-//			
 			}
-			 sum = cDao.sum();
+			sum = cDao.sum();
 			list = cDao.countlist();
+
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-
+		resp.setCharacterEncoding("UTF-8");
+		resp.setContentType("text/html; charset=UTF-8");
+		
+		PrintWriter out = resp.getWriter();
+		
+		json.append("[");
+		for (int i = 0; i < list.size(); i++) {
+			CategoryView cate = list.get(i);
+			json.append(String.format("{\"count\":%d,", cate.getCount()));
+			json.append(String.format("\"name\":\"%s\",", cate.getName()));
+			json.append(String.format("\"id\":\"%s\"}", cate.getId()));
+		
+			if(i != list.size()-1)
+				json.append(",");
+		}
+		json.append("]");
+		
+		System.out.println(json);
+		out.write(json.toString());
 	}
 }

@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="../../js/category.js"></script>
 </head>
 <body>
 	<h1>카테고리관리</h1>
@@ -23,15 +24,23 @@
 		<a href="category">카테고리관리</a>
 	</aside>
 	<!--메인------------------------------------------------  -->
-	<section>
+	<section id="category">
 		<form action="category" method="get">
+			<template class="list-template">
+				<dt class="name"></dt>
+				<dd class="count"></dd>
+			</template>
 			<dl>
+				<template class="sum-template">
+					<dt>합계</dt>
+					<dd class="sum"></dd>
+				</template>
 				<c:forEach var="cate" items="${countlist}">
-					<dt>${cate.name}</dt>
-					<dd>${cate.count}</dd>
+					<dt class="name">${cate.name}</dt>
+					<dd class="count">${cate.count}</dd>
 				</c:forEach>
 				<dt>합계</dt>
-				<dd>${sum}</dd>
+				<dd class="sum">${sum}</dd>
 			</dl>
 			<input type="text" name="name"> 
 			<input type="submit" value="추가">
