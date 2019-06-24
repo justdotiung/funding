@@ -16,20 +16,19 @@ import com.funding.web.dao.oracle.OracleCategoryDao;
 import com.funding.web.entity.Category;
 import com.funding.web.entity.CategoryView;
 
-@WebServlet("/view/admin/category")
-public class CategoryController extends HttpServlet {
+@WebServlet("/view/admin/category-ajax")
+public class CategoryAjaxController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
 		HttpSession session = req.getSession();
 		String id = (String) session.getAttribute("id");
 		List<CategoryView> list = new ArrayList<>();
 		int sum = 0;
 
-		if (id == null || !id.equals("1")) {
-			resp.sendRedirect("/error.jsp");
-			return;
-		}
+//		if (id == null || !id.equals("1")) {
+//			resp.sendRedirect("/error.jsp");
+//			return;
+//		} 새로운 페이지 보낼때 어떻게 해야하는지 물어보기
 
 		CategoryDao cDao = new OracleCategoryDao();
 		int result = 0;
@@ -43,11 +42,11 @@ public class CategoryController extends HttpServlet {
 				System.out.println(category.getAdmin_Id());
 
 				result = cDao.insert(category);
-				if (result == -1) {
-					resp.sendRedirect("/error.jsp");
-					return;
-				}
-			
+//				if (result == -1) {
+//					resp.sendRedirect("/error.jsp");
+//					return;
+//				}
+//			
 			}
 			 sum = cDao.sum();
 			list = cDao.countlist();
@@ -56,11 +55,6 @@ public class CategoryController extends HttpServlet {
 			e.printStackTrace();
 		}
 
-	
-		req.setAttribute("sum", sum);
-		req.setAttribute("countlist", list);
-		req.getRequestDispatcher("/WEB-INF/view/admin/category.jsp").forward(req, resp);
-		return;
 
 	}
 }

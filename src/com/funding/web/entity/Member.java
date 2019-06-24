@@ -18,6 +18,25 @@ public class Member {
 	
     }
     
+    
+    
+	public Member(String id, String email, String name, String pw, String phone, String profile, String admin_id,
+			String address, String address_num, String regdate) {
+		super();
+		this.id = id;
+		this.email = email;
+		this.name = name;
+		this.pw = pw;
+		this.phone = phone;
+		this.profile = profile;
+		this.admin_id = admin_id;
+		this.address = address;
+		this.address_num = address_num;
+		this.regdate = regdate;
+	}
+
+
+
 	public Member(String email, String name, String pw, String phone, String eventCheck) {
 		super();
 		this.email = email;

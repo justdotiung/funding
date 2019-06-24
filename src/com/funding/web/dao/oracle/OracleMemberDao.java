@@ -70,7 +70,6 @@ public class OracleMemberDao implements MemberDao {
 					rs.getString("pw"),
 					rs.getString("phone"),
 					rs.getString("profile"),
-					rs.getString("event_check"),
 					rs.getString("admin_id"),
 					rs.getString("address"),
 					rs.getString("address_num"),

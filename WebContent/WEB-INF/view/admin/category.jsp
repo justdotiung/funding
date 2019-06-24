@@ -24,7 +24,7 @@
 	</aside>
 	<!--메인------------------------------------------------  -->
 	<section>
-		<form action="category" method="post">
+		<form action="category" method="get">
 			<dl>
 				<c:forEach var="cate" items="${countlist}">
 					<dt>${cate.name}</dt>

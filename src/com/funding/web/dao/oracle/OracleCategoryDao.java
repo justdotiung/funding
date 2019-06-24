@@ -131,7 +131,7 @@ public class OracleCategoryDao implements CategoryDao {
 	public int sum() throws Exception {
 		int result =0;
 		String url = "jdbc:oracle:thin:@222.111.247.47:1522/xepdb1";
-		String sql = "select sum(to_number(count)) sum from category_view";
+		String sql = "select sum(count) sum from category_view";
 		Class.forName("oracle.jdbc.driver.OracleDriver");
 		Connection con = DriverManager.getConnection(url, "\"PRJ\"", "1234");
 		PreparedStatement ps = con.prepareStatement(sql);
