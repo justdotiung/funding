@@ -13,7 +13,7 @@ window.addEventListener("load",function(){
             return;
         }
         var request = new XMLHttpRequest();
-        request.open("GET","/admin/category-ajax?n="+name1,false);      
+        request.open("GET","/view/admin/category-ajax?n="+name1,false);      
         request.send();
         
 
