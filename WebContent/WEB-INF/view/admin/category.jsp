@@ -27,24 +27,58 @@
 	<section id="category">
 		<form action="category" method="get">
 			<template class="list-template">
-				<dt class="name"></dt>
-				<dd class="count"></dd>
+				<tr>
+					<td class="name"></td>
+					<td class="count"></td>
+				</tr>
 			</template>
+			<template class="sum-template">
+				<tr>
+					<td class="summ">합계</td>
+					<td class="sum"></td>
+				</tr>
+			</template>
+			<table>
+				<thead>
+					<tr>
+						<td>
+							카테고리 이름
+						</td>
+						<td>
+							업체 수
+						</td>
+					</tr>
+				</thead>
+				<tbody>
+					<c:forEach var="cate" items="${countlist}">
+					<tr>
+						<td class="name">
+							${cate.name}
+						</td>
+						<td class="sum">
+							${cate.count}
+						</td>
+					</tr>
+				</c:forEach>
+					<tr>
+						<td class="summ">합계</td>
+						<td class="sum">${sum}</td>
+					</tr>
+				</tbody>
+			</table>
+		</form>
+		<input type="text" name="name"> 
+		<input type="button" value="추가">
+		<!-- <div>
 			<dl>
-				<template class="sum-template">
-					<dt>합계</dt>
-					<dd class="sum"></dd>
-				</template>
 				<c:forEach var="cate" items="${countlist}">
 					<dt class="name">${cate.name}</dt>
 					<dd class="count">${cate.count}</dd>
 				</c:forEach>
-				<dt>합계</dt>
+				<dt class="summ">합계</dt>
 				<dd class="sum">${sum}</dd>
 			</dl>
-			<input type="text" name="name"> 
-			<input type="submit" value="추가">
-		</form>
+		</div> -->
 	</section>
 </body>
 </html>

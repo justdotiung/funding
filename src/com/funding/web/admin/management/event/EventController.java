@@ -21,8 +21,13 @@ public class EventController extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		HttpSession session = req.getSession();
 		String sessionId= (String) session.getAttribute("id");
-		if(sessionId !=null && sessionId.equals("1")) {
-			
+		
+		
+		if(sessionId ==null || !sessionId.equals("1")) {
+			resp.sendRedirect("/error.jsp");
+			return;
+		}
+		
 			int page = 1;
 			String p = req.getParameter("page");
 			String title = "";
@@ -79,8 +84,5 @@ public class EventController extends HttpServlet {
 				e.printStackTrace();
 			}
 			req.getRequestDispatcher("/WEB-INF/view/admin/event.jsp").forward(req, resp);
-		}
-		else
-			resp.sendRedirect("/error.jsp");
 	}
 }

@@ -24,8 +24,8 @@ public class CategoryAjaxController extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		HttpSession session = req.getSession();
 		String id = (String) session.getAttribute("id");
-		List<CategoryView> list = new ArrayList<>();
 		int sum = 0;
+		List<CategoryView> list = new ArrayList<>();
 		StringBuilder json = new StringBuilder();
 //		if (id == null || !id.equals("1")) {
 //			resp.sendRedirect("/error.jsp");
@@ -36,21 +36,20 @@ public class CategoryAjaxController extends HttpServlet {
 		int result = 0;
 		try {
 
-			if (req.getParameter("name") != null && !req.getParameter("name").equals("")) {
-				String name = req.getParameter("name");
+				String name = req.getParameter("n");
 				Category category = new Category();
 				category.setName(name);
 				category.setAdmin_Id(id);
+				System.out.println(category.getName());
 				System.out.println(category.getAdmin_Id());
 
 				result = cDao.insert(category);
-//				if (result == -1) {
-//					resp.sendRedirect("/error.jsp");
-//					return;
-//				}
-			}
-			sum = cDao.sum();
+				if (result == -1) {
+					resp.sendRedirect("/error.jsp");
+					return;
+				}
 			list = cDao.countlist();
+			sum = cDao.sum();
 
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -61,17 +60,16 @@ public class CategoryAjaxController extends HttpServlet {
 		
 		PrintWriter out = resp.getWriter();
 		
-		json.append("[");
+		json.append("{\"list\":[");
 		for (int i = 0; i < list.size(); i++) {
 			CategoryView cate = list.get(i);
 			json.append(String.format("{\"count\":%d,", cate.getCount()));
 			json.append(String.format("\"name\":\"%s\",", cate.getName()));
 			json.append(String.format("\"id\":\"%s\"}", cate.getId()));
-		
 			if(i != list.size()-1)
 				json.append(",");
 		}
-		json.append("]");
+		json.append(String.format("],\"sum\":%d}",sum));
 		
 		System.out.println(json);
 		out.write(json.toString());
