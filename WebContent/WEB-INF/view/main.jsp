@@ -23,7 +23,10 @@
 		<a href="member/mypage">마이페이지</a>
 		<a href="member/logout">로그아웃</a>
 	</c:if>
-
+	<c:forEach var="li" items="${list}">
+	${li.id}
+		<div><a href="member/detail?id=${li.id}">${li.title}</a></div>
+	</c:forEach>
 
 </body>
 </html>

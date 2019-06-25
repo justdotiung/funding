@@ -20,9 +20,37 @@ public class Funding {
 
 	
 	
+	public Funding(String id, String admin_id, String member_id, String category_id, String regdate, String title,
+			String amount, String sDate, String eDate, String hit, String state) {
+		super();
+		this.id = id;
+		this.admin_id = admin_id;
+		this.member_id = member_id;
+		this.category_id = category_id;
+		this.regdate = regdate;
+		this.title = title;
+		this.amount = amount;
+		this.sDate = sDate;
+		this.eDate = eDate;
+		this.hit = hit;
+		this.state = state;
+	}
+
+
+
+	public Funding(String id,String member_id, String category_id, String title, String amount, String intro_img, String sDate,
+			String eDate) {
+		this.id=id;
+		this.member_id = member_id;
+		this.category_id = category_id;
+		this.title = title;
+		this.amount = amount;
+		this.intro_img = intro_img;
+		this.sDate = sDate;
+		this.eDate = eDate;
+	}
 	public Funding(String member_id, String category_id, String title, String amount, String intro_img, String sDate,
 			String eDate) {
-		
 		this.member_id = member_id;
 		this.category_id = category_id;
 		this.title = title;

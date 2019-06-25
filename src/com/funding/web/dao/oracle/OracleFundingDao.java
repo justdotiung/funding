@@ -14,6 +14,39 @@ import com.funding.web.entity.Member;
 
 public class OracleFundingDao implements FundingDao {
 
+	
+	public List<Funding> getList() throws Exception {
+
+		
+		List<Funding> list = new ArrayList<>();
+		
+		String sql = "SELECT to_char(id) fid, to_char(member_id) id, to_char(category_id) ca, title, t_amount, intro_img, s_date, e_date FROM funding ";
+
+		String url = "jdbc:oracle:thin:@222.111.247.47:1522/xepdb1";
+		Class.forName("oracle.jdbc.driver.OracleDriver");
+		Connection con = DriverManager.getConnection(url, "\"PRJ\"", "1234");
+		PreparedStatement st = con.prepareStatement(sql);
+				
+		ResultSet rs = st.executeQuery();
+		while(rs.next()) {
+			Funding	funding = new Funding(
+						rs.getString("fid"),
+						rs.getString("id"),
+						rs.getString("ca"),
+						rs.getString("title"),
+						rs.getString("t_amount"),
+						rs.getString("intro_img"),
+						rs.getString("s_date"),
+						rs.getString("e_date"));
+			list.add(funding);
+
+		}
+		rs.close();
+		st.close();
+		con.close();
+
+		return list;
+	}
 
 	@Override
 	public List<Funding> getList(String email) throws Exception {
@@ -82,6 +115,39 @@ public class OracleFundingDao implements FundingDao {
 						rs.getString("state")
 				    );
 					
+		}
+		
+		return funding;
+	}
+	@Override
+	public Funding getk(String mid) throws Exception {
+		Funding funding = null;
+		
+		String sql = "select  "
+				+ "id, admin_id, member_id,  category_id,  regdate, title, t_amount,"
+				+ " s_date, e_date,  hit, state "
+				+ "from funding where id = ?";
+		String url = "jdbc:oracle:thin:@222.111.247.47:1522/xepdb1";
+		Class.forName("oracle.jdbc.driver.OracleDriver");
+		Connection con = DriverManager.getConnection(url, "\"PRJ\"", "1234");
+		PreparedStatement pt = con.prepareStatement(sql);
+		pt.setString(1, mid);
+		ResultSet rs = pt.executeQuery();
+		while(rs.next()) {
+			funding = new Funding(
+					rs.getString("id"),
+					rs.getString("admin_id"),
+					rs.getString("member_id"),
+					rs.getString("category_id"),
+					rs.getString("regdate"),
+					rs.getString("title"),
+					rs.getString("t_amount"),
+					rs.getString("s_date"),
+					rs.getString("e_date"),
+					rs.getString("hit"),
+					rs.getString("state")
+					);
+			
 		}
 		
 		return funding;

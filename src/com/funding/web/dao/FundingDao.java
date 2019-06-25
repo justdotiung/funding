@@ -6,7 +6,8 @@ import com.funding.web.entity.Funding;
 
 public interface FundingDao {
 	
-//	List<Funding> getList() throws Exception;	//관리자-회원리스트
+
+	List<Funding> getList() throws Exception;	//관리자-회원리스트
 	List<Funding> getList(String email) throws Exception;	//관리자-회원리스트(페이지 넘기기)
 //	List<Funding> getList(int page, String field, String query) throws Exception;	//관리자-회원리스트(검색)
 	
@@ -16,6 +17,7 @@ public interface FundingDao {
 	int update(Funding funding) throws Exception;	//마이페이지-정보수정
 
 	Funding getTitle(String id) throws Exception;
+	Funding getk(String mid) throws Exception;
 	
 
 }
